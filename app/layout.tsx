@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'SPO Onchain Alive',
-  description: 'Cardano stake pools and relay health transformed into living generative art.',
+  title: 'Cardano Blockchain Alive',
+  description: 'Every ranked Cardano stake pool in one disc: distance is stake, brightness is relay health.',
   icons: { icon: '/favicon.svg' },
 };
 

@@ -394,3 +394,142 @@
 .spo-hero.washi .rd-desc{font-size:11.5px;line-height:1.9}
 .spo-hero.washi .rd-meaning{font-size:11px;line-height:1.85;margin:7px 0 9px}
 .spo-hero.washi .kamon-emblem{margin-bottom:12px}
+
+/* ---- the opening screen: the whole network, as a disc you can go into ------
+   The opening screen used to be a single pool - whichever one the ranking put
+   first - which quietly made rank 1 the face of Cardano. This one is every
+   ranked pool at once and commits to none of them.
+
+   The disc is not wallpaper behind the words. It holds the right of the frame
+   and answers the wheel; the copy keeps to the left so that going into the
+   disc never means reaching through a paragraph. */
+.galaxy-hero{position:relative;isolation:isolate;width:100%;
+ min-height:min(940px,calc(100vh - 70px));
+ display:grid;align-content:center;
+ padding:clamp(40px,6vh,84px) 5vw clamp(84px,11vh,128px);
+ /* Painted here, not left to the canvas: where WebGL2 is missing the canvas
+    takes itself out and this is the night sky that remains. */
+ background:radial-gradient(ellipse 54% 62% at 68% 48%,rgba(36,58,120,.28),transparent 74%),
+            radial-gradient(ellipse 120% 90% at 60% 50%,rgba(8,10,26,.5),#020308 80%)}
+.galaxy-stage{position:absolute;inset:0;z-index:0}
+.galaxy-art{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair;
+ touch-action:pan-y}
+.galaxy-art[data-fallback]{display:none}
+/* Shades the reading side only. A veil over the whole frame would take the
+   disc out to protect a paragraph that is not even sitting on it. */
+.galaxy-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:linear-gradient(100deg,rgba(2,3,8,.93),rgba(2,3,8,.72) 27%,rgba(2,3,8,.26) 50%,transparent 68%),
+            linear-gradient(180deg,rgba(2,3,8,.72),transparent 15%,transparent 84%,rgba(2,3,8,.62))}
+
+/* The copy does not take the pointer. Everything under it is the disc, and the
+   wheel has to reach it even where a sentence happens to be in the way. */
+.galaxy-copy{position:relative;z-index:2;pointer-events:none;
+ width:min(620px,52%);display:grid;justify-items:start;text-align:left}
+.galaxy-copy .eyebrow{margin:0 0 16px;color:#8496a8;letter-spacing:.24em}
+.galaxy-copy h1{margin:0;font-weight:500;line-height:.86;letter-spacing:-.055em;
+ font-size:clamp(34px,4.4vw,64px);
+ background:linear-gradient(168deg,#fff 6%,#cfe0f2 42%,#5f86bd 98%);
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+ filter:drop-shadow(0 8px 44px rgba(70,130,220,.34))}
+.galaxy-copy h1>span{display:block;margin-bottom:14px;color:#7fd0ff;
+ -webkit-text-fill-color:#7fd0ff;font:500 10px monospace;letter-spacing:.26em}
+.galaxy-copy .intro{max-width:520px;margin:22px 0 0;border:0;padding:0;
+ color:#a9b7c5;font-size:13.5px;line-height:1.85}
+
+/* The network's own figures, given the same treatment as a pool's headline row,
+   so the two screens visibly read off the same kind of record. */
+.net-figures{margin-top:clamp(24px,3.4vh,38px);width:100%;
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ border-top:1px solid rgba(120,170,215,.2);border-bottom:1px solid rgba(120,170,215,.2)}
+.net-figures>div{position:relative;padding:14px 12px 13px}
+.net-figures>div+div{border-left:1px solid rgba(120,170,215,.13)}
+.net-figures>div:nth-child(n+4){border-top:1px solid rgba(120,170,215,.13)}
+.net-figures>div:nth-child(3n+1){border-left:0}
+.net-figures b{display:block;color:#e7eff8;font:500 clamp(14px,1.35vw,19px)/1 monospace;
+ letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.net-figures span{display:block;margin-top:8px;color:#66798a;font:6.5px monospace;letter-spacing:.15em}
+
+/* How to read the picture. Without this the disc is decoration; with it, where
+   every mote sits is a claim the reader can go and check. */
+.net-legend{list-style:none;margin:clamp(16px,2.4vh,26px) 0 0;padding:0;
+ display:flex;flex-wrap:wrap;gap:8px 18px}
+.net-legend li{display:flex;align-items:baseline;gap:7px}
+.net-legend span{color:#5e7183;font:6.5px monospace;letter-spacing:.15em}
+.net-legend b{color:#9fc4de;font:8.5px monospace;letter-spacing:.04em}
+.net-legend li.mote b{color:#7fd0ff}
+.galaxy-hint{margin:clamp(14px,2vh,22px) 0 0;display:flex;align-items:center;gap:9px;
+ color:#6f8ba2;font:7px monospace;letter-spacing:.19em}
+.galaxy-hint i{width:16px;height:1px;background:rgba(127,208,255,.7)}
+
+/* Once the reader has come far enough in, the pool's own artwork is drawn where
+   its motes were. The disc can carry a thousand pools as figures but not at
+   full resolution - so past that point it hands the pool over to the same
+   drawing its own page uses, at the size the disc had promised. */
+.galaxy-focus{position:absolute;z-index:2;transform:translate(-50%,-50%);
+ pointer-events:none;display:grid;place-items:center;
+ transition:opacity .45s ease,width .25s ease,height .25s ease}
+.galaxy-focus:before{content:"";position:absolute;inset:-22%;border-radius:50%;
+ background:radial-gradient(circle,rgba(3,6,14,.78),rgba(3,6,14,.42) 46%,transparent 72%)}
+.galaxy-focus .block-art{position:relative;width:100%;height:100%}
+.galaxy-focus button{position:absolute;bottom:-14px;pointer-events:auto;
+ display:flex;align-items:baseline;gap:10px;
+ border:1px solid hsl(var(--pool-hue) 55% 60%/.4);border-radius:2px;padding:5px 11px;
+ background:rgba(4,9,18,.82);cursor:pointer;backdrop-filter:blur(4px);
+ transition:border-color .2s,background .2s}
+.galaxy-focus button:hover{border-color:hsl(var(--pool-hue) 70% 70%/.85);background:rgba(12,28,52,.92)}
+.galaxy-focus button b{color:hsl(var(--pool-hue) 62% 84%);font:600 11px monospace;letter-spacing:.02em}
+.galaxy-focus button span{color:#8fa2b2;font:7px monospace;letter-spacing:.1em}
+.galaxy-focus button em{color:#7fd0ff;font:7px monospace;font-style:normal;letter-spacing:.18em}
+
+/* Tickers. They appear only once the stars have room for them, which is a fact
+   about the picture rather than a setting: below that magnification the names
+   would be sitting on top of one another and none of them could be aimed at. */
+.galaxy-marks{position:absolute;inset:0;z-index:2;pointer-events:none}
+.galaxy-marks button{position:absolute;pointer-events:auto;transform:translate(10px,-50%);
+ border:1px solid rgba(126,200,255,.28);border-radius:2px;padding:3px 7px;
+ background:rgba(4,10,22,.72);color:#bfe1fa;font:8.5px monospace;letter-spacing:.09em;
+ white-space:nowrap;cursor:pointer;backdrop-filter:blur(3px);
+ transition:color .18s,border-color .18s,background .18s}
+.galaxy-marks button:hover,.galaxy-marks button.on{color:#fff;border-color:rgba(150,220,255,.75);
+ background:rgba(16,44,78,.9)}
+.galaxy-marks button.on{box-shadow:0 0 18px -4px rgba(126,200,255,.85)}
+.galaxy-reset{position:absolute;z-index:3;right:clamp(16px,2.4vw,34px);top:clamp(16px,2.4vh,30px);
+ border:1px solid rgba(126,200,255,.3);border-radius:2px;padding:6px 10px;
+ background:rgba(4,10,22,.7);color:#a9d4f2;font:7px monospace;letter-spacing:.16em;
+ cursor:pointer;transition:color .2s,border-color .2s}
+.galaxy-reset:hover{color:#fff;border-color:rgba(150,220,255,.8)}
+
+.scroll-cue{position:absolute;z-index:3;left:50%;bottom:clamp(20px,3.4vh,36px);
+ transform:translateX(-50%);display:grid;justify-items:center;gap:9px;
+ color:#7f93a6;font:7px monospace;letter-spacing:.22em;text-decoration:none;transition:color .3s}
+.scroll-cue:hover{color:#bfe3fb}
+.scroll-cue i{width:1px;height:26px;transform-origin:top;
+ background:linear-gradient(180deg,rgba(127,208,255,.9),transparent);
+ animation:cue 2.4s ease-in-out infinite}
+@keyframes cue{50%{transform:scaleY(.45)}}
+@media(prefers-reduced-motion:reduce){.scroll-cue i{animation:none}}
+
+/* The selector is a screen of its own now, not a strip under a chosen pool. */
+.select-head{max-width:1320px;margin:0 auto 22px;text-align:center}
+.select-head h2{margin:0;font-size:clamp(20px,2.6vw,32px);font-weight:500;
+ letter-spacing:-.03em;color:#dfe9f3}
+.select-head p{margin:10px 0 0;color:#6d7d8c;font:9px monospace;letter-spacing:.14em}
+.pool-stream{padding-top:clamp(40px,6vh,72px)}
+
+@media(max-width:980px){
+ .galaxy-copy{width:min(620px,72%)}
+ .galaxy-veil{background:linear-gradient(100deg,rgba(2,3,8,.94),rgba(2,3,8,.8) 42%,rgba(2,3,8,.34) 68%,transparent 86%),
+              linear-gradient(180deg,rgba(2,3,8,.72),transparent 15%,transparent 84%,rgba(2,3,8,.66))}
+}
+@media(max-width:800px){
+ .galaxy-hero{min-height:auto;padding-bottom:104px}
+ .galaxy-copy{width:100%}
+ .net-figures{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .net-figures>div:nth-child(3n+1){border-left:1px solid rgba(120,170,215,.13)}
+ .net-figures>div:nth-child(odd){border-left:0}
+ .net-figures>div:nth-child(n+3){border-top:1px solid rgba(120,170,215,.13)}
+ .net-legend{gap:7px 14px}
+ /* On a touch screen the wheel is a scroll, so the disc gives the page the
+    whole gesture and the tickers are reached from the list below instead. */
+ .galaxy-art{touch-action:auto}
+}
