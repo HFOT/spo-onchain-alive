@@ -2,6 +2,7 @@
 import {useCallback,useEffect,useMemo,useState} from 'react';
 import BlockArt from './block-art';
 import PoolArt,{crestName,crestRomaji,crestMeaning,type ArtData} from './pool-art';
+import {fetchPools} from './pools-source';
 type Parts={reach:number;redundancy:number;independence:number;ownership:number;continuity:number;latency:number};
 type Pool={ticker:string;pool:string;score:number;stake:number;sat:number;delegators:number;blocks:number;hist:number[];margin:number;fixedAda:number;entries:number;probed:number;reachable:number;atTip:number;rtt:number|null;severity:string;issues:{code:string}[];rank:number;checked:string;parts?:Parts;shared?:boolean;kesLinked?:boolean};
 const fullParts:Parts={reach:35,redundancy:15,independence:25,ownership:10,continuity:10,latency:5};
@@ -106,7 +107,7 @@ function axisEvidence(p:Pool,lang:Lang){
 }
 function artData(p:Pool):ArtData{const b=artPool(p);return{axes:b.axes,hueBase:b.hueBase,histVar:b.histVar,speedMul:b.speedMul,warnAxes:b.warnAxes,hist:p.hist,ticker:p.ticker,score:p.score,sig:poolSig(p.pool)}}
 function artPool(p:Pool,motif=0){const count=Math.max(12,Math.min(180,p.delegators));const parts=p.parts||fullParts,axes=[parts.reach,parts.redundancy,parts.independence,parts.ownership,parts.continuity,parts.latency].map((v,i)=>Math.max(0,Math.min(1,(v||0)/AXCAP[i])));const hist=p.hist.length?p.hist:[0];const mean=hist.reduce((a,b)=>a+b,0)/hist.length;const variance=hist.reduce((a,b)=>a+(b-mean)**2,0)/hist.length;const histVar=mean>0?Math.max(0,Math.min(1,Math.sqrt(variance)/mean*4)):0;const speedMul=p.rtt==null?.6:Math.max(.35,Math.min(1.6,1.6-Math.log10(p.rtt+1)*.42));const warnAxes=[...(p.shared?[2]:[]),...(p.kesLinked?[4]:[])];const hueBase=poolHue(p.ticker,p.pool);return{block_hash:p.pool,block_no:p.rank,axes,histVar,speedMul,warnAxes,hueBase,motif,tx_hashes:Array.from({length:count},(_,i)=>`${p.pool}:${i}:${p.hist[i%Math.max(1,p.hist.length)]||0}`),txs:Array.from({length:count},(_,i)=>({tx_hash:`${p.pool}:${i}`,total_output:(p.stake/Math.max(1,count))*1e6,plutus_contracts:i<p.reachable?['relay']:[],assets_minted:i===p.blocks%count?['block']:[]}))}}
-async function loadPools():Promise<Pool[]>{const r=await fetch('/api/pools',{cache:'no-store'});if(!r.ok)throw new Error(`pools ${r.status}`);return(await r.json()).pools}
+async function loadPools():Promise<Pool[]>{return await fetchPools() as Pool[]}
 export default function Home(){
  const[pools,setPools]=useState<Pool[]>(fallback),[selected,setSelected]=useState<Pool|null>(null),[query,setQuery]=useState(''),[status,setStatus]=useState<'loading'|'live'|'demo'>('loading'),[frame,setFrame]=useState(true),[motif,setMotif]=useState(0),[lang,setLang]=useState<Lang>('ja');
  const refresh=useCallback(async()=>{try{const next=await loadPools();setPools(next);setSelected(x=>x&&next.find(p=>p.pool===x.pool)||next[0]);setStatus('live')}catch(e){console.error(e);setStatus('demo')}},[]);
