@@ -165,7 +165,7 @@
 .rd-score span{margin-top:9px;color:#5a6875;font:6.5px monospace;letter-spacing:.15em}
 .rd-score small{margin-top:5px;color:#4f5d69;font:6.5px monospace;letter-spacing:.08em;white-space:nowrap}
 .rd-axes{padding:10px 14px 11px;display:grid;gap:5px;align-content:center}
-.rd-axes>div{display:grid;grid-template-columns:78px minmax(40px,1fr) 24px 86px;
+.rd-axes>div{display:grid;grid-template-columns:72px minmax(34px,1fr) 42px 100px;
  align-items:center;gap:9px}
 .rd-axes span{color:#5b6b79;font:6.5px monospace;letter-spacing:.1em}
 .rd-axes i{height:2px;background:rgba(120,160,190,.13);display:block}
@@ -185,6 +185,11 @@
 .rd-chips{list-style:none;margin:0;padding:0;display:grid;
  grid-template-columns:repeat(3,minmax(0,1fr));gap:7px 14px}
 .rd-chips li{display:flex;align-items:baseline;gap:7px;min-width:0}
+/* The signal list is the one chip that carries a sentence rather than a number:
+   a pool can share an endpoint, share an IP with several pools and sit in a KES
+   cluster at once, and "shared but not deducted" has to stay readable rather
+   than being cut to look like a deduction. It gets the whole row. */
+.rd-chips li:last-child{grid-column:1/-1}
 .rd-chips span{color:#54626e;font:6.5px monospace;letter-spacing:.12em}
 .rd-chips b{color:hsl(var(--pool-hue) 30% 78%);font:8.5px monospace;font-variant-numeric:tabular-nums;
  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -195,7 +200,7 @@
  .rd-health{grid-template-columns:1fr}
  .rd-score{border-right:0;border-bottom:1px solid hsl(var(--pool-hue) 30% 50%/.13);
   grid-auto-flow:column;align-items:baseline;gap:9px}
- .rd-axes>div{grid-template-columns:70px minmax(30px,1fr) 22px 74px}
+ .rd-axes>div{grid-template-columns:64px minmax(24px,1fr) 38px 90px}
 }
 
 /* ---- washi: the presentation the CREST motif switches the page into ----
