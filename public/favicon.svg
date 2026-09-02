@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="6" x2="58" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111B32"/>
+      <stop offset="1" stop-color="#03050B"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="11" y1="44" x2="54" y2="17" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#61E7FF"/>
+      <stop offset=".52" stop-color="#7C77FF"/>
+      <stop offset="1" stop-color="#E758FF"/>
+    </linearGradient>
+    <radialGradient id="core">
+      <stop stop-color="#FFF"/>
+      <stop offset=".3" stop-color="#A8F5FF"/>
+      <stop offset="1" stop-color="#6F76FF"/>
+    </radialGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bg)"/>
+  <path d="M10 41C17 41 19 22 29 22s10 20 25 20" fill="none" stroke="url(#flow)" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M10 34c8 0 11 10 20 10 10 0 12-25 24-25" fill="none" stroke="url(#flow)" stroke-width="1.5" stroke-linecap="round" opacity=".72"/>
+  <circle cx="10" cy="41" r="2" fill="#60E8FF"/>
+  <circle cx="19" cy="28" r="1.4" fill="#73C7FF"/>
+  <circle cx="30" cy="44" r="1.5" fill="#8777FF"/>
+  <circle cx="43" cy="28" r="1.5" fill="#B45CFF"/>
+  <circle cx="54" cy="19" r="2" fill="#F05CFF"/>
+  <circle cx="32" cy="32" r="5.2" fill="url(#core)"/>
+  <circle cx="32" cy="32" r="8.3" fill="none" stroke="#8DEBFF" stroke-width="1" opacity=".38"/>
+</svg>

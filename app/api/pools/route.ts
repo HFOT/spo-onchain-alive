@@ -1,0 +1,4 @@
+import {NextResponse} from 'next/server';
+const SOURCE='https://hfot.github.io/cardano-relay-health/',TTL=300_000;
+let cache:{pools:unknown[];fetched_at:number}|null=null;
+export async function GET(){if(cache&&Date.now()-cache.fetched_at<TTL)return NextResponse.json({...cache,source:SOURCE});try{const r=await fetch(SOURCE,{cache:'no-store'});if(!r.ok)throw new Error(`relay health ${r.status}`);const html=await r.text(),start=html.indexOf('const data=['),end=html.indexOf('];',start);if(start<0||end<0)throw new Error('pool dataset not found');const pools=JSON.parse(html.slice(start+11,end+1));cache={pools,fetched_at:Date.now()};return NextResponse.json({...cache,source:SOURCE})}catch(error){if(cache)return NextResponse.json({...cache,source:SOURCE,stale:true});return NextResponse.json({error:error instanceof Error?error.message:'relay health unavailable'},{status:502})}}

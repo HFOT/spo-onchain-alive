@@ -1,0 +1,391 @@
+.spo-hero h1{font-size:clamp(58px,7.4vw,104px)}
+.hero-art{position:relative}
+.frame-toggle{position:absolute;z-index:6;top:10px;right:12px;border:1px solid hsl(var(--pool-hue) 55% 60%/.34);border-radius:2px;padding:5px 9px;background:rgba(4,7,13,.62);color:hsl(var(--pool-hue) 60% 78%/.85);font:6.5px monospace;letter-spacing:.14em;cursor:pointer;opacity:.42;transition:opacity .25s,border-color .25s}
+.hero-art:hover .frame-toggle{opacity:1}
+.motif-switch{position:absolute;z-index:6;top:10px;left:12px;display:flex;gap:4px;opacity:.5;transition:opacity .25s}
+.hero-art:hover .motif-switch{opacity:1}
+.motif-switch button{border:1px solid hsl(var(--pool-hue) 50% 58%/.24);border-radius:2px;padding:5px 8px;background:rgba(4,7,13,.62);color:hsl(var(--pool-hue) 25% 68%/.7);font:6.5px monospace;letter-spacing:.13em;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+.motif-switch button:hover{color:hsl(var(--pool-hue) 60% 84%);border-color:hsl(var(--pool-hue) 60% 62%/.5)}
+.motif-switch button.on{color:hsl(var(--pool-hue) 72% 86%);border-color:hsl(var(--pool-hue) 65% 62%/.7);background:hsl(var(--pool-hue) 45% 18%/.72);box-shadow:0 0 14px -4px hsl(var(--pool-hue) 70% 55%/.6)}
+@media(max-width:800px){.motif-switch{gap:3px}.motif-switch button{padding:4px 5px;letter-spacing:.06em}}
+.hero-art.framed{padding:20px;background:linear-gradient(150deg,hsl(var(--pool-hue) 42% 12%/.5),rgba(3,5,10,.72) 55%,hsl(var(--pool-hue) 34% 9%/.42));border:1px solid hsl(var(--pool-hue) 48% 52%/.26);border-radius:3px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.045),inset 0 1px 0 hsl(var(--pool-hue) 70% 78%/.14),0 24px 60px -30px hsl(var(--pool-hue) 60% 40%/.5)}
+.hero-art.framed .art-color{position:absolute;inset:20px 20px 62px;border:1px solid hsl(var(--pool-hue) 40% 50%/.2);background:radial-gradient(ellipse at 50% 45%,hsl(var(--pool-hue) 45% 10%/.55),rgba(2,4,8,.92) 78%)}
+.art-plate{position:absolute;z-index:4;left:20px;right:20px;bottom:20px;height:38px;display:flex;align-items:center;gap:14px;padding:0 13px;border:1px solid hsl(var(--pool-hue) 45% 55%/.22);background:linear-gradient(180deg,hsl(var(--pool-hue) 30% 12%/.6),rgba(3,5,10,.78))}
+.art-plate b{color:hsl(var(--pool-hue) 62% 82%);font:600 13px monospace;letter-spacing:.02em;white-space:nowrap}
+.art-plate span{color:#7d8c99;font:7px monospace;letter-spacing:.13em;white-space:nowrap}
+.art-plate code{margin-left:auto;color:hsl(var(--pool-hue) 30% 60%/.75);font:6.5px monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-art.framed .art-caption{bottom:70px}
+@media(max-width:800px){.hero-art.framed{padding:12px}.hero-art.framed .art-color{inset:12px 12px 52px}.art-plate{left:12px;right:12px;bottom:12px;height:34px;gap:9px}.art-plate code{display:none}}
+.art-caption{position:absolute;z-index:3;left:8%;right:8%;bottom:4%;display:flex;justify-content:center;gap:18px;color:#56697a;font:7px monospace;letter-spacing:.13em}
+.pool-stream{padding-top:16px}.pool-rail{display:grid!important;grid-template-columns:repeat(12,minmax(92px,1fr));gap:7px!important;align-items:stretch!important}
+.pool-card{width:auto!important;min-width:0!important;min-height:132px;padding:11px 10px!important;text-align:left;border:1px solid rgba(106,151,184,.12)!important;background:linear-gradient(145deg,rgba(12,21,34,.82),rgba(5,8,14,.58))!important;opacity:.62!important;overflow:hidden}
+.pool-card:hover,.pool-card.active{opacity:1!important;border-color:rgba(100,207,255,.42)!important;background:linear-gradient(145deg,rgba(16,39,59,.96),rgba(9,11,24,.84))!important}.pool-card.active{box-shadow:inset 0 1px rgba(190,240,255,.2),0 0 28px rgba(70,170,229,.1)}
+.pool-card-top{display:grid;grid-template-columns:auto 5px 1fr;gap:6px;align-items:center}.pool-card-top span{color:#596978;font:6px monospace}.pool-card-top i{width:5px;height:5px;border-radius:50%;background:#4be1a5;box-shadow:0 0 8px currentColor}.pool-card-top i.severity-low{background:#f3c65b}.pool-card-top i.severity-medium,.pool-card-top i.severity-high{background:#ec697e}.pool-card-top b{text-align:right;color:#dbe7ef;font:600 11px monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pool-stake{display:flex;justify-content:space-between;align-items:end;margin-top:17px;gap:4px}.pool-stake strong{color:#b9c9d6;font:500 9px monospace;white-space:nowrap}.pool-stake span{color:#5d6c79;font:6px monospace;white-space:nowrap}.pool-bar{height:2px;margin:9px 0 11px;background:rgba(91,124,150,.16)}.pool-bar span{display:block;height:100%;background:linear-gradient(90deg,#52d8ff,#696ee9 60%,#c75dec);box-shadow:0 0 8px rgba(87,193,255,.55)}
+.pool-card dl{display:grid;grid-template-columns:1fr 1fr;gap:7px 8px;margin:0}.pool-card dl div{display:flex;justify-content:space-between;gap:3px}.pool-card dt{color:#52606e;font:6px monospace}.pool-card dd{margin:0;color:#9caab7;font:6px monospace}.pool-card.active:after{display:none!important}
+@media(max-width:1100px){.pool-rail{display:flex!important;justify-content:flex-start!important;overflow-x:auto;padding-bottom:9px}.pool-card{min-width:120px!important}}@media(max-width:800px){.art-caption{gap:8px;flex-wrap:wrap}.spo-hero h1{font-size:64px}}
+.pool-directory{padding:72px 5vw 84px;border-top:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg,rgba(7,12,21,.72),rgba(2,4,8,.94))}.directory-head{max-width:1320px;margin:0 auto 38px;display:flex;align-items:end;justify-content:space-between;gap:40px}.directory-head p{margin:0 0 13px;color:#5e7181;font:8px monospace;letter-spacing:.18em}.directory-head h2{margin:0;font-size:clamp(38px,5vw,70px);font-weight:500;line-height:.88;letter-spacing:-.06em;background:linear-gradient(120deg,#f1f6fb,#7998ad);-webkit-background-clip:text;color:transparent}.directory-head label{width:min(440px,48%);display:grid;gap:8px}.directory-head label>span,.directory-head small{color:#617180;font:7px monospace;letter-spacing:.12em}.directory-head input{width:100%;border:0;border-bottom:1px solid rgba(102,197,242,.34);padding:12px 0;background:transparent;color:#dce9f2;font:13px monospace;outline:none}.directory-head input:focus{border-color:#6bd9ff;box-shadow:0 8px 20px -18px #6bd9ff}.directory-head input::placeholder{color:#42515e}.directory-head small{text-align:right}.directory-columns,.directory-list{max-width:1320px;margin:auto}.directory-columns{display:grid;grid-template-columns:minmax(260px,2.1fr) repeat(5,minmax(70px,1fr));gap:14px;padding:0 14px 10px;color:#536371;font:7px monospace;letter-spacing:.1em}.directory-list{border-top:1px solid rgba(120,174,205,.14);max-height:640px;overflow:auto;scrollbar-color:#263847 transparent}.directory-list>button{width:100%;display:grid;grid-template-columns:minmax(260px,2.1fr) repeat(5,minmax(70px,1fr));gap:14px;align-items:center;border:0;border-bottom:1px solid rgba(101,147,177,.09);padding:12px 14px;background:transparent;color:#aebdca;text-align:left;cursor:pointer;transition:background .2s,border-color .2s}.directory-list>button:hover,.directory-list>button.selected{background:linear-gradient(90deg,rgba(50,150,205,.12),rgba(100,74,191,.05));border-color:rgba(103,205,255,.23)}.dir-identity{min-width:0;display:grid;grid-template-columns:36px 5px 70px minmax(0,1fr);align-items:center;gap:8px}.dir-identity em{color:#526371;font:7px monospace;font-style:normal}.dir-identity i{width:5px;height:5px;border-radius:50%;background:#4be1a5;box-shadow:0 0 7px currentColor}.dir-identity i.severity-low{background:#f3c65b}.dir-identity i.severity-medium,.dir-identity i.severity-high{background:#ec697e}.dir-identity strong{color:#dce8f0;font:11px monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dir-identity code{color:#4f6170;font:7px monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.directory-list>button>b,.directory-list>button>span{font:9px monospace;color:#a5b5c1;white-space:nowrap}.directory-list small{display:block;margin-top:3px;color:#51616e;font:6px monospace;font-weight:400}@media(max-width:800px){.pool-directory{padding:54px 20px}.directory-head{align-items:stretch;flex-direction:column}.directory-head label{width:100%}.directory-columns{display:none}.directory-list>button{grid-template-columns:minmax(190px,2fr) repeat(2,1fr)}.directory-list>button>span:nth-last-child(n+3),.directory-list>button>b{display:none}.dir-identity{grid-template-columns:28px 5px 58px minmax(0,1fr)}}
+
+/* ---- hero copy: HUD treatment, keyed to the pool's own hue ---- */
+.spo-hero .web3-copy{position:relative;padding-left:20px}
+/* A live rail down the left edge, so the column reads as an instrument panel. */
+.spo-hero .web3-copy:before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;
+ background:linear-gradient(180deg,transparent,hsl(var(--pool-hue) 62% 58%/.55) 12%,hsl(var(--pool-hue) 62% 58%/.16) 55%,transparent);
+ box-shadow:0 0 12px hsl(var(--pool-hue) 70% 55%/.35)}
+.spo-hero .chain-state{gap:10px}
+.spo-hero .chain-state span{padding:4px 9px;border:1px solid hsl(var(--pool-hue) 40% 55%/.22);
+ background:hsl(var(--pool-hue) 40% 14%/.35);color:hsl(var(--pool-hue) 26% 74%/.85);letter-spacing:.16em}
+.spo-hero .chain-state span:first-child{border-color:hsl(var(--pool-hue) 62% 58%/.5);color:hsl(var(--pool-hue) 68% 82%)}
+.spo-hero .eyebrow{color:#5d6c7a;letter-spacing:.24em}
+.spo-hero h1{background:linear-gradient(168deg,#fff 4%,hsl(var(--pool-hue) 34% 88%) 38%,hsl(var(--pool-hue) 46% 52%) 96%);
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+ filter:drop-shadow(0 6px 34px hsl(var(--pool-hue) 70% 46%/.28))}
+.spo-hero h1>span{color:hsl(var(--pool-hue) 70% 78%);-webkit-text-fill-color:hsl(var(--pool-hue) 70% 78%);letter-spacing:.2em}
+.spo-hero .hashline{padding:7px 10px;border:1px solid hsl(var(--pool-hue) 30% 50%/.16);
+ background:rgba(255,255,255,.02);color:hsl(var(--pool-hue) 18% 62%/.85);
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spo-hero .intro{border-left:2px solid hsl(var(--pool-hue) 62% 58%/.55);color:#94a5b3}
+
+/* Headline figures: the number leads, the label sits under it as a caption. */
+.spo-hero .facts{gap:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ margin-top:30px;border-top:1px solid hsl(var(--pool-hue) 30% 50%/.16);
+ border-bottom:1px solid hsl(var(--pool-hue) 30% 50%/.16)}
+.spo-hero .facts>div{position:relative;padding:16px 14px 14px}
+.spo-hero .facts>div+div{border-left:1px solid hsl(var(--pool-hue) 30% 50%/.13)}
+.spo-hero .facts>div:before{content:"";position:absolute;left:14px;top:0;width:14px;height:1px;
+ background:hsl(var(--pool-hue) 68% 62%/.8)}
+.spo-hero .facts b{display:block;font:500 22px/1 monospace;letter-spacing:-.03em;
+ color:hsl(var(--pool-hue) 22% 92%);font-variant-numeric:tabular-nums}
+.spo-hero .facts span{display:block;margin-top:8px;color:#5b6a78;font:7px monospace;letter-spacing:.16em}
+
+/* Readout grid: each cell gets a tick and the value is set in tabular figures. */
+.spo-hero .explorer-grid{gap:0;border-top:0;padding-top:0;margin-top:0;
+ grid-template-columns:repeat(3,minmax(0,1fr))}
+.spo-hero .explorer-grid div{position:relative;padding:14px 14px 13px;min-width:0}
+.spo-hero .explorer-grid div+div{border-left:1px solid hsl(var(--pool-hue) 30% 50%/.1)}
+.spo-hero .explorer-grid div:nth-child(n+4){border-top:1px solid hsl(var(--pool-hue) 30% 50%/.1)}
+.spo-hero .explorer-grid div:nth-child(3n+1){border-left:0}
+.spo-hero .explorer-grid dt{color:#55636f;letter-spacing:.15em}
+.spo-hero .explorer-grid dd{margin-top:7px;color:hsl(var(--pool-hue) 20% 84%);font:10px monospace;
+ font-variant-numeric:tabular-nums}
+.spo-hero .explorer-grid div:after{content:"";position:absolute;left:14px;bottom:0;width:0;height:1px;
+ background:hsl(var(--pool-hue) 68% 62%/.7);transition:width .45s ease}
+.spo-hero .explorer-grid div:hover:after{width:34px}
+@media(max-width:800px){
+ .spo-hero .facts{grid-template-columns:1fr 1fr}
+ .spo-hero .facts>div:nth-child(3){grid-column:1/-1;border-left:0;border-top:1px solid hsl(var(--pool-hue) 30% 50%/.13)}
+ .spo-hero .explorer-grid{grid-template-columns:1fr 1fr}
+ .spo-hero .explorer-grid div:nth-child(3n+1){border-left:1px solid hsl(var(--pool-hue) 30% 50%/.1)}
+ .spo-hero .explorer-grid div:nth-child(odd){border-left:0}
+ .spo-hero .explorer-grid div:nth-child(n+3){border-top:1px solid hsl(var(--pool-hue) 30% 50%/.1)}
+}
+
+
+/* Fit the whole story — copy, artwork and readout — on the first screen. */
+.spo-hero{height:calc(100vh - 70px);min-height:620px;padding:22px 5vw 16px;
+ grid-template-rows:minmax(0,1fr) auto;align-items:center}
+.spo-hero>.copy,.spo-hero>.hero-art{min-height:0}
+.spo-hero .hero-art{height:100%;max-height:100%;margin:0 auto}
+.spo-hero h1{font-size:clamp(46px,5.4vw,78px)}
+.spo-hero .intro{margin:20px 0 22px;font-size:14px}
+.spo-hero .facts{margin-top:22px}
+.spo-hero .facts>div{padding:13px 14px 12px}
+.spo-hero .explorer-grid div{padding:11px 14px 10px}
+.spo-hero .chain-state{margin-bottom:20px}
+@media(max-width:800px){.spo-hero{height:auto;min-height:auto}.spo-hero .hero-art{height:auto}}
+
+
+/* Give the artwork and its readout one shared width so they line up as a plate.
+   The width is driven by the height left over once the nav, the hero padding and
+   the readout have taken their share, which keeps the square artwork on screen. */
+.spo-hero{--plate:min(100%,calc(100vh - 320px))}
+.spo-hero .hero-art{width:var(--plate);height:var(--plate);max-height:none;margin:0 auto}
+.spo-hero .art-note{width:var(--plate);margin-left:auto;margin-right:auto}
+@media(max-width:800px){
+ .spo-hero{--plate:min(100%,540px)}
+ .spo-hero .hero-art{height:auto;aspect-ratio:1}
+}
+
+
+/* Keep the artwork square. Spanning both rows made it as tall as the column but
+   only as wide as the column allowed, which stretched it; driving the height
+   from the width restores the square and the left column is tightened to match. */
+.spo-hero>.hero-art{width:100%;height:auto;aspect-ratio:1;max-height:100%;align-self:center}
+.spo-hero h1{font-size:clamp(40px,4.4vw,64px)}
+.spo-hero .chain-state{margin-bottom:14px;gap:7px}
+.spo-hero .chain-state span{padding:3px 7px}
+.spo-hero .eyebrow{margin-bottom:12px}
+.spo-hero .hashline{margin-top:14px;padding:5px 9px}
+.spo-hero .intro{margin:14px 0 16px;font-size:13px;line-height:1.62;padding-left:13px}
+.spo-hero .facts{margin-top:15px}
+.spo-hero .facts>div{padding:10px 12px 9px}
+.spo-hero .facts b{font-size:19px}
+.spo-hero .facts span{margin-top:6px}
+.spo-hero .explorer-grid div{padding:9px 12px 8px}
+.spo-hero .explorer-grid dd{margin-top:5px;font-size:9px}
+.spo-hero .art-note{margin-top:12px;padding:11px 13px}
+.spo-hero .note-head{margin-bottom:9px;gap:9px}
+.spo-hero .note-cols{padding-top:9px;gap:10px}
+.spo-hero .note-axes{gap:4px 18px}
+.spo-hero .note-grid{gap:7px 14px}
+
+/* The copy column is one block — heading, figures, readout — so centre it against
+   the artwork. Pinning it to the bottom of the row dropped the whole column below
+   the top of the picture in every motif but CREST, whose emblem line made up the
+   difference by accident. */
+.spo-hero>.copy{align-self:center}
+@media(max-width:800px){.spo-hero>.copy{align-self:auto}}
+
+
+/* ---- readout: one block, six axes as its spine ----------------------------
+   The stats, the health score and the render notes used to be three lists that
+   repeated each other — the score appeared twice, relay reach and chain tip
+   restated what the REACH and CONTINUITY bars already showed. They are folded
+   into a single panel here: headline figures, then the score broken into its six
+   axes with the measurement each was scored from sitting on the same row, then
+   how those numbers become the picture. */
+.readout{margin-top:18px;border:1px solid hsl(var(--pool-hue) 36% 52%/.2);
+ background:linear-gradient(165deg,hsl(var(--pool-hue) 32% 11%/.46),rgba(4,7,13,.66))}
+.rd-figures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.rd-figures>div{position:relative;padding:12px 12px 11px}
+.rd-figures>div+div{border-left:1px solid hsl(var(--pool-hue) 30% 50%/.13)}
+.rd-figures>div:before{content:"";position:absolute;left:12px;top:0;width:12px;height:1px;
+ background:hsl(var(--pool-hue) 68% 62%/.8)}
+.rd-figures b{display:block;color:hsl(var(--pool-hue) 20% 92%);font:500 16px/1 monospace;
+ letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rd-figures span{display:block;margin-top:7px;color:#5a6875;font:6.5px monospace;letter-spacing:.14em}
+
+.rd-health{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0;
+ border-top:1px solid hsl(var(--pool-hue) 30% 50%/.16)}
+.rd-score{padding:13px 15px;border-right:1px solid hsl(var(--pool-hue) 30% 50%/.13);
+ display:grid;align-content:center;justify-items:start}
+.rd-score b{color:hsl(var(--pool-hue) 60% 84%);font:500 30px/1 monospace;letter-spacing:-.04em;
+ text-shadow:0 0 22px hsl(var(--pool-hue) 70% 55%/.45)}
+.rd-score i{color:#5d6b78;font:10px monospace;font-style:normal;margin-top:3px}
+.rd-score span{margin-top:9px;color:#5a6875;font:6.5px monospace;letter-spacing:.15em}
+.rd-score small{margin-top:5px;color:#4f5d69;font:6.5px monospace;letter-spacing:.08em;white-space:nowrap}
+.rd-axes{padding:10px 14px 11px;display:grid;gap:5px;align-content:center}
+.rd-axes>div{display:grid;grid-template-columns:78px minmax(40px,1fr) 24px 86px;
+ align-items:center;gap:9px}
+.rd-axes span{color:#5b6b79;font:6.5px monospace;letter-spacing:.1em}
+.rd-axes i{height:2px;background:rgba(120,160,190,.13);display:block}
+.rd-axes i b{display:block;height:100%;background:hsl(var(--pool-hue) 62% 62%);
+ box-shadow:0 0 7px hsl(var(--pool-hue) 70% 55%/.55)}
+.rd-axes em{color:#93a4b2;font:6.5px monospace;font-style:normal;text-align:right;
+ font-variant-numeric:tabular-nums}
+.rd-axes small{color:#4e5c69;font:6.5px monospace;letter-spacing:.06em;text-align:right;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.rd-render{padding:12px 14px 13px;border-top:1px solid hsl(var(--pool-hue) 30% 50%/.16);
+ background:linear-gradient(180deg,hsl(var(--pool-hue) 40% 14%/.3),transparent 88%)}
+.rd-title{margin:0;display:flex;align-items:baseline;gap:10px}
+.rd-title span{color:#5c6b78;font:6.5px monospace;letter-spacing:.17em}
+.rd-title b{color:hsl(var(--pool-hue) 64% 82%);font:600 11px monospace;letter-spacing:.08em}
+.rd-desc{margin:8px 0 11px;color:#94a3b1;font:11px/1.55 system-ui,sans-serif}
+.rd-chips{list-style:none;margin:0;padding:0;display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));gap:7px 14px}
+.rd-chips li{display:flex;align-items:baseline;gap:7px;min-width:0}
+.rd-chips span{color:#54626e;font:6.5px monospace;letter-spacing:.12em}
+.rd-chips b{color:hsl(var(--pool-hue) 30% 78%);font:8.5px monospace;font-variant-numeric:tabular-nums;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:900px){
+ .rd-figures{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .rd-figures>div:nth-child(odd){border-left:0}
+ .rd-figures>div:nth-child(n+3){border-top:1px solid hsl(var(--pool-hue) 30% 50%/.13)}
+ .rd-health{grid-template-columns:1fr}
+ .rd-score{border-right:0;border-bottom:1px solid hsl(var(--pool-hue) 30% 50%/.13);
+  grid-auto-flow:column;align-items:baseline;gap:9px}
+ .rd-axes>div{grid-template-columns:70px minmax(30px,1fr) 22px 74px}
+}
+
+/* ---- washi: the presentation the CREST motif switches the page into ----
+   A kamon does not belong on a dark HUD. When the crest is showing, the plate
+   turns to paper: warm ground, ink-dark marks, a seal-red accent, and the
+   vertical, widely-spaced lettering of a brushed inscription. Nothing moves but
+   the crest itself. */
+.spo-hero.washi .hero-art.framed{
+ background:linear-gradient(168deg,#efe7d7,#e6dcc8 58%,#dccfb6);
+ border-color:rgba(60,44,28,.32);
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),0 26px 60px -34px rgba(40,26,12,.8)}
+.spo-hero.washi .hero-art.framed .art-color{
+ background:radial-gradient(ellipse at 50% 44%,#f6f0e2,#e9dfcb 76%);
+ border-color:rgba(60,44,28,.2);
+ /* the tooth of the paper */
+ box-shadow:inset 0 0 44px rgba(120,96,62,.14)}
+.spo-hero.washi .art-plate{
+ border-color:rgba(60,44,28,.26);
+ background:linear-gradient(180deg,rgba(246,240,226,.9),rgba(226,214,190,.92))}
+.spo-hero.washi .art-plate b{color:#8f1d1d;letter-spacing:.12em}   /* seal red */
+.spo-hero.washi .art-plate span{color:#5a4a34}
+.spo-hero.washi .art-plate code{color:#877258}
+.spo-hero.washi .art-caption{color:#6b5942;font-size:11px;letter-spacing:.5em;gap:34px}
+.spo-hero.washi .art-caption span:first-child{
+ color:#8f1d1d;font-size:15px;letter-spacing:.3em}
+.spo-hero.washi .frame-toggle,
+.spo-hero.washi .motif-switch button{
+ border-color:rgba(60,44,28,.3);background:rgba(246,240,226,.78);color:#5a4a34}
+.spo-hero.washi .motif-switch button.on{
+ border-color:#8f1d1d;background:#8f1d1d;color:#f6f0e2;box-shadow:none}
+.spo-hero.washi .rd-render{background:linear-gradient(180deg,rgba(143,29,29,.10),transparent 88%)}
+.spo-hero.washi .rd-title b{color:#c76a5c}
+
+/* ---- washi, in full ----
+   In CREST the page is not a dark instrument panel any more. A kamon belongs on
+   paper, so the whole plate turns: warm ground, sumi-dark text, vermilion for the
+   accents that were the pool's hue, and a mincho face — the serif of Japanese
+   printing and the closest thing on a system to a brushed stroke. */
+.spo-hero.washi{
+ --sumi:#231d18;--sumi-soft:#5c4f42;--sumi-faint:#8b7c6a;
+ --shu:#9d2323;--paper:#efe7d7;--paper-2:#e3d9c4;
+ background:
+  repeating-linear-gradient(102deg,rgba(150,126,92,.045) 0 2px,transparent 2px 5px),
+  repeating-linear-gradient(6deg,rgba(150,126,92,.03) 0 3px,transparent 3px 7px),
+  linear-gradient(158deg,var(--paper),#e9e0cd 46%,var(--paper-2));
+ font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP","MS Mincho",serif}
+.spo-hero.washi:before{content:"";position:absolute;inset:0;pointer-events:none;
+ box-shadow:inset 0 0 120px rgba(120,96,62,.16)}
+
+.spo-hero.washi .web3-copy:before{background:linear-gradient(180deg,transparent,var(--shu) 14%,rgba(157,35,35,.2) 62%,transparent);box-shadow:none}
+.spo-hero.washi .chain-state span{border-color:rgba(60,44,28,.28);background:rgba(255,252,244,.5);
+ color:var(--sumi-soft);font-family:monospace}
+.spo-hero.washi .chain-state span:first-child{border-color:var(--shu);color:var(--shu)}
+.spo-hero.washi .eyebrow{color:var(--sumi-faint);font-family:monospace}
+.spo-hero.washi h1{background:none;color:var(--sumi);-webkit-text-fill-color:var(--sumi);
+ filter:none;font-weight:600;letter-spacing:-.02em}
+.spo-hero.washi h1>span{color:var(--shu);-webkit-text-fill-color:var(--shu);font-family:monospace}
+.spo-hero.washi .hashline{border-color:rgba(60,44,28,.2);background:rgba(255,252,244,.45);
+ color:var(--sumi-faint);font-family:monospace}
+.spo-hero.washi .intro{border-left-color:var(--shu);color:var(--sumi-soft);font-size:14px;line-height:1.95}
+
+.spo-hero.washi .readout{border-color:rgba(60,44,28,.24);
+ background:linear-gradient(165deg,rgba(255,252,244,.6),rgba(232,222,202,.5))}
+.spo-hero.washi .rd-figures>div+div,
+.spo-hero.washi .rd-health,.spo-hero.washi .rd-score,
+.spo-hero.washi .rd-render{border-color:rgba(60,44,28,.18)}
+.spo-hero.washi .rd-figures>div:before{background:var(--shu)}
+.spo-hero.washi .rd-figures b{color:var(--sumi)}
+.spo-hero.washi .rd-figures span,.spo-hero.washi .rd-axes span,
+.spo-hero.washi .rd-score span,.spo-hero.washi .rd-chips span,
+.spo-hero.washi .rd-title span{color:var(--sumi-faint);font-family:monospace}
+.spo-hero.washi .rd-score b{color:var(--shu);text-shadow:none}
+.spo-hero.washi .rd-score i,.spo-hero.washi .rd-score small,
+.spo-hero.washi .rd-axes small{color:var(--sumi-faint)}
+.spo-hero.washi .rd-axes i{background:rgba(90,70,46,.16)}
+.spo-hero.washi .rd-axes i b{background:var(--sumi);box-shadow:none}
+.spo-hero.washi .rd-axes em,.spo-hero.washi .rd-chips b{color:var(--sumi)}
+.spo-hero.washi .rd-desc{color:var(--sumi-soft);font-size:12px;line-height:1.9}
+.spo-hero.washi .rd-title b{color:var(--shu);font-family:monospace}
+
+/* The inscription under the crest: seal, name written down the page, reading
+   beneath it, then the pool it belongs to. */
+.spo-hero.washi .art-caption{left:0;right:0;bottom:5%;gap:26px;align-items:flex-end;
+ justify-content:center;color:var(--sumi-soft);font-family:inherit;letter-spacing:normal}
+.spo-hero.washi .mon-seal{display:grid;place-items:center;width:26px;height:26px;
+ background:var(--shu);color:var(--paper);font-size:14px;letter-spacing:0;
+ box-shadow:0 1px 0 rgba(0,0,0,.15)}
+.spo-hero.washi .mon-name{writing-mode:vertical-rl;text-orientation:upright;
+ font-size:17px;letter-spacing:.22em;color:var(--sumi);line-height:1}
+.spo-hero.washi .mon-romaji{color:var(--sumi-faint);font:8px monospace;letter-spacing:.22em;
+ padding-bottom:3px}
+.spo-hero.washi .mon-ticker{color:var(--shu);font:9px monospace;letter-spacing:.2em;
+ padding-bottom:3px}
+@media(max-width:800px){.spo-hero.washi .mon-name{writing-mode:horizontal-tb}}
+
+/* ---- the inscription behind everything ----
+   A hanging scroll carries its writing large and faint behind whatever is
+   mounted on it. The crest's own name is set down the plate at scroll size and
+   left almost invisible, so it reads as ground rather than as content. */
+.spo-hero.washi{position:relative;overflow:hidden;
+ background:
+  repeating-linear-gradient(102deg,rgba(150,126,92,.035) 0 2px,transparent 2px 5px),
+  repeating-linear-gradient(6deg,rgba(150,126,92,.022) 0 3px,transparent 3px 7px),
+  linear-gradient(158deg,#faf8f3,#f4f0e6 48%,#ece6d8)}
+.washi-ink{position:absolute;inset:0;z-index:0;pointer-events:none;
+ display:flex;align-items:center;justify-content:flex-end;gap:2vw;padding-right:3vw;
+ font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP","MS Mincho",serif}
+.washi-ink span{writing-mode:vertical-rl;text-orientation:upright;
+ font-size:clamp(90px,15vw,240px);line-height:.94;letter-spacing:.06em;
+ color:rgba(35,29,24,.052)}
+.washi-ink b{writing-mode:vertical-rl;font-weight:400;
+ font-size:clamp(26px,3.4vw,54px);letter-spacing:.34em;
+ color:rgba(157,35,35,.06);align-self:flex-start;margin-top:6vh}
+/* The inscription must stay out of flow: raising every child to position:relative
+   also caught it, and an in-flow .washi-ink takes a grid cell and shunts the
+   whole hero out of place. */
+.spo-hero.washi>*:not(.washi-ink){position:relative;z-index:1}
+@media(max-width:800px){.washi-ink{justify-content:center;padding-right:0}
+ .washi-ink b{display:none}}
+
+/* ---- the emblem line ----
+   In CREST the roman subtitle is replaced by a struck plate: rules running out
+   to either side of a vermilion seal, the way a crest is presented on a title
+   page, with the reading set small and wide beneath it. */
+.kamon-emblem{display:grid;grid-template-columns:1fr auto auto auto 1fr;
+ align-items:center;gap:11px;margin:0 0 16px}
+.kamon-emblem i{height:1px;background:linear-gradient(90deg,transparent,rgba(35,29,24,.34))}
+.kamon-emblem i:last-of-type{background:linear-gradient(90deg,rgba(35,29,24,.34),transparent)}
+.kamon-emblem span{color:var(--sumi-soft);font:9px monospace;letter-spacing:.42em;
+ text-indent:.42em}
+.kamon-emblem b{display:grid;place-items:center;width:30px;height:30px;
+ background:var(--shu);color:#f7f4ee;font-size:16px;font-weight:400;
+ box-shadow:0 1px 0 rgba(0,0,0,.16)}
+.kamon-emblem em{grid-column:1/-1;justify-self:center;color:var(--sumi-faint);
+ font:7px monospace;font-style:normal;letter-spacing:.5em;text-indent:.5em;margin-top:7px}
+@media(max-width:800px){.kamon-emblem{gap:8px}.kamon-emblem span{letter-spacing:.24em}}
+
+/* ---- the plate carries the inscription ----
+   Written across the crest, the name fought the picture. It belongs where a
+   mounted work carries its title: on the plate below, set horizontally in the
+   mincho face, with the reading beside it. */
+.spo-hero.washi .art-plate{height:52px;gap:16px;padding:0 16px;
+ font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP","MS Mincho",serif;
+ border-color:rgba(60,44,28,.26);
+ background:linear-gradient(180deg,rgba(255,253,247,.92),rgba(236,228,210,.94))}
+.spo-hero.washi .hero-art.framed .art-color{inset:20px 20px 76px}
+.plate-seal{display:grid;place-items:center;width:24px;height:24px;flex:0 0 auto;
+ background:var(--shu);color:#f7f4ee;font:14px/1 inherit;font-style:normal}
+.plate-mon{color:var(--sumi)!important;font:17px/1 inherit!important;letter-spacing:.26em!important;
+ white-space:nowrap}
+.plate-romaji{color:var(--sumi-faint)!important;font:8px monospace!important;
+ letter-spacing:.24em!important;white-space:nowrap}
+.spo-hero.washi .art-plate code{margin-left:auto;color:var(--sumi-faint);
+ font:7.5px monospace;letter-spacing:.1em}
+@media(max-width:800px){
+ .spo-hero.washi .art-plate{height:44px;gap:10px}
+ .plate-mon{font-size:14px!important;letter-spacing:.16em!important}
+ .plate-romaji{display:none}
+}
+/* The crest note is Japanese prose, so give it the mincho face and the looser
+   leading that Japanese text needs to stay readable. */
+.spo-hero.washi .rd-desc{font-family:inherit;font-size:12.5px;line-height:2.05;
+ letter-spacing:.02em;color:var(--sumi-soft)}
+
+/* ---- language switch ---- */
+.nav-right{display:flex;align-items:center;gap:18px}
+.lang-switch{display:flex;gap:4px}
+.lang-switch button{border:1px solid rgba(255,255,255,.14);border-radius:2px;padding:4px 9px;
+ background:transparent;color:#7f8b98;font:8px monospace;letter-spacing:.14em;cursor:pointer;
+ transition:color .2s,border-color .2s,background .2s}
+.lang-switch button:hover{color:#cfe0ee;border-color:rgba(255,255,255,.3)}
+.lang-switch button.on{color:#0a1018;background:#8fb6cf;border-color:#8fb6cf}
+
+/* ---- what the crest's subject stands for ---- */
+.rd-meaning{margin:9px 0 11px;padding-left:11px;
+ border-left:2px solid hsl(var(--pool-hue) 60% 58%/.5);
+ color:#8ea0ad;font:11px/1.75 system-ui,sans-serif}
+.rd-meaning span{display:block;margin-bottom:3px;color:#5c6b78;font:6.5px monospace;
+ letter-spacing:.17em}
+.spo-hero.washi .rd-meaning{border-left-color:var(--shu);color:var(--sumi-soft);
+ font-family:inherit;font-size:12px;line-height:2}
+.spo-hero.washi .rd-meaning span{color:var(--sumi-faint);font-family:monospace}
+.spo-hero.washi .lang-switch button.on{background:var(--shu);border-color:var(--shu);color:#f7f4ee}
+
+/* CREST carries two extra passages — the emblem line and the subject's meaning —
+   so the column has to give ground elsewhere to stay on one screen. The generic
+   lead is dropped here: the crest note already says what the picture is. */
+.spo-hero.washi .intro{display:none}
+.spo-hero.washi h1{font-size:clamp(34px,3.6vw,54px)}
+.spo-hero.washi .hashline{margin-top:10px}
+.spo-hero.washi .rd-desc{font-size:11.5px;line-height:1.9}
+.spo-hero.washi .rd-meaning{font-size:11px;line-height:1.85;margin:7px 0 9px}
+.spo-hero.washi .kamon-emblem{margin-bottom:12px}
