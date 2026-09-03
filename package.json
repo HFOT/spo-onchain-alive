@@ -10,7 +10,7 @@
     "build": "vinext build",
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "build:static": "vite build --config vite.static.config.ts"
+    "build:static": "node tools/fetch-chain.mjs public/chain.json && vite build --config vite.static.config.ts"
   },
   "dependencies": {
     "next": "16.2.6",

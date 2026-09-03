@@ -533,3 +533,97 @@
     whole gesture and the tickers are reached from the list below instead. */
  .galaxy-art{touch-action:auto}
 }
+
+/* ---- the opening screen: the chain, as it stands -------------------------
+   Laid out as an explorer rather than as a picture with numbers on it: the
+   recent blocks in a row along the top, the detail underneath. The spheres are
+   the only thing WebGL draws; the row, the panels and every label are ordinary
+   elements, so the layout reflows, the blocks are real buttons, and a reader
+   without WebGL still gets the whole explorer minus its glass.
+
+   The canvas sits above the panels and takes no pointer events. Each sphere is
+   drawn into a box the layout reserved for it, so nothing is ever covered. */
+.chain{position:relative;isolation:isolate;width:100%;
+ min-height:min(1000px,calc(100vh - 70px));
+ display:grid;grid-template-rows:auto auto 1fr;gap:clamp(18px,3vh,34px);
+ padding:clamp(30px,5vh,58px) 5vw clamp(34px,5vh,56px);
+ background:radial-gradient(ellipse 70% 60% at 50% 24%,rgba(28,48,104,.22),transparent 72%),#020308}
+.chain-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+
+.chain-head{position:relative;z-index:2;display:flex;align-items:flex-end;
+ justify-content:space-between;gap:5vw;flex-wrap:wrap}
+.chain-head h1{margin:0;font-weight:500;line-height:.86;letter-spacing:-.055em;
+ font-size:clamp(30px,4vw,58px);
+ background:linear-gradient(168deg,#fff 6%,#cfe0f2 44%,#5f86bd 98%);
+ -webkit-background-clip:text;background-clip:text;color:transparent}
+.chain-head h1>span{display:block;margin-bottom:13px;color:#7fd0ff;
+ -webkit-text-fill-color:#7fd0ff;font:500 10px monospace;letter-spacing:.26em}
+
+/* The epoch. Cardano's honest answer to a difficulty countdown: the same five
+   days, every time, so the only question is how far through them we are. */
+.chain-epoch{min-width:min(360px,100%);flex:1 1 300px;max-width:460px}
+.ce-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.ce-top b{color:#dceaf6;font:600 13px monospace;letter-spacing:.12em}
+.ce-top span{color:#7fd0ff;font:11px monospace;font-variant-numeric:tabular-nums}
+.chain-epoch i{display:block;height:3px;margin:9px 0 8px;background:rgba(120,170,215,.16)}
+.chain-epoch i em{display:block;height:100%;
+ background:linear-gradient(90deg,#4a7fd0,#7fd0ff);box-shadow:0 0 12px rgba(127,208,255,.5)}
+.ce-bot{display:flex;justify-content:space-between;gap:12px;
+ color:#66798a;font:7px monospace;letter-spacing:.14em}
+
+/* Newest on the right, because that is the end the chain grows from. */
+.chain-row{position:relative;z-index:2;display:flex;gap:clamp(6px,.9vw,14px);
+ align-items:stretch;overflow-x:auto;padding-bottom:6px;
+ scrollbar-color:#22303f transparent}
+.chain-block{flex:1 1 0;min-width:78px;display:grid;justify-items:center;gap:7px;
+ padding:11px 8px 10px;cursor:pointer;
+ border:1px solid hsl(var(--blk-hue) 45% 55%/.2);border-radius:3px;
+ background:linear-gradient(170deg,hsl(var(--blk-hue) 40% 16%/.34),rgba(4,7,13,.6));
+ transition:border-color .2s,background .2s,transform .2s}
+.chain-block:hover,.chain-block.on{transform:translateY(-3px);
+ border-color:hsl(var(--blk-hue) 62% 62%/.62);
+ background:linear-gradient(170deg,hsl(var(--blk-hue) 46% 22%/.5),rgba(6,10,18,.72))}
+.chain-block b{color:#9fb3c3;font:8px monospace;font-weight:400;letter-spacing:.04em;
+ font-variant-numeric:tabular-nums}
+/* The box the sphere is drawn into. Empty on purpose. */
+.cb-ball{display:block;width:100%;aspect-ratio:1;max-width:62px}
+.chain-block em{color:hsl(var(--blk-hue) 55% 78%);font:9px monospace;font-style:normal;
+ font-variant-numeric:tabular-nums}
+.chain-block i{color:#5f7183;font:7px monospace;font-style:normal;letter-spacing:.08em;
+ max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.chain-panels{position:relative;z-index:2;display:grid;
+ grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(14px,2vw,26px);
+ align-content:start}
+.chain-focus,.chain-stats{position:relative;padding:clamp(16px,2vw,24px);
+ border:1px solid rgba(120,170,215,.17);background:rgba(6,10,18,.5)}
+.cp-label{margin:0 0 clamp(12px,2vh,20px);color:#66798a;font:7px monospace;letter-spacing:.2em}
+.chain-focus{display:grid;justify-items:center;align-content:start;gap:clamp(12px,2vh,20px)}
+/* The one being looked at, big enough to count what is inside it. */
+.cf-ball{width:clamp(170px,22vw,280px);aspect-ratio:1}
+.cf-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0;width:100%}
+.cf-meta dt{color:#5c6e7e;font:6.5px monospace;letter-spacing:.13em}
+.cf-meta dd{margin:5px 0 0;color:#dbe7f1;font:11px monospace;
+ font-variant-numeric:tabular-nums;white-space:nowrap}
+.cf-open{display:flex;align-items:baseline;gap:11px;cursor:pointer;
+ border:1px solid rgba(126,200,255,.3);border-radius:2px;padding:7px 13px;
+ background:rgba(8,16,30,.7);transition:border-color .2s,background .2s}
+.cf-open:hover{border-color:rgba(150,220,255,.8);background:rgba(16,38,66,.85)}
+.cf-open b{color:#bfe1fa;font:600 11px monospace;letter-spacing:.05em}
+.cf-open span{color:#7fd0ff;font:7px monospace;letter-spacing:.17em}
+.cp-empty{margin:0;color:#7d8c99;font:11px monospace}
+
+.chain-stats dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:clamp(14px,2.4vh,22px) 16px;margin:0}
+.chain-stats dt{color:#5c6e7e;font:6.5px monospace;letter-spacing:.13em}
+.chain-stats dd{margin:6px 0 0;color:#e7eff8;font:500 clamp(15px,1.5vw,20px)/1 monospace;
+ letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cp-note{margin:clamp(16px,2.6vh,24px) 0 0;color:#8395a4;font-size:12px;line-height:1.75}
+.cp-seen{margin:12px 0 0;color:#56697a;font:7px monospace;letter-spacing:.13em}
+
+@media(max-width:900px){
+ .chain{min-height:auto}
+ .chain-panels{grid-template-columns:1fr}
+ .chain-block{min-width:66px}
+ .cf-meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

@@ -42,3 +42,6 @@ tsconfig.tsbuildinfo
 
 # static build output
 /dist-static/
+
+# Fetched at build time from Koios; never a source file.
+/public/chain.json
