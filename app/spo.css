@@ -552,11 +552,11 @@
 
 .chain-head{position:relative;z-index:2;display:flex;align-items:flex-end;
  justify-content:space-between;gap:5vw;flex-wrap:wrap}
-.chain-head h1{margin:0;font-weight:500;line-height:.86;letter-spacing:-.055em;
+.chain-head h2{margin:0;font-weight:500;line-height:.86;letter-spacing:-.055em;
  font-size:clamp(30px,4vw,58px);
  background:linear-gradient(168deg,#fff 6%,#cfe0f2 44%,#5f86bd 98%);
  -webkit-background-clip:text;background-clip:text;color:transparent}
-.chain-head h1>span{display:block;margin-bottom:13px;color:#7fd0ff;
+.chain-head h2>span{display:block;margin-bottom:13px;color:#7fd0ff;
  -webkit-text-fill-color:#7fd0ff;font:500 10px monospace;letter-spacing:.26em}
 
 /* The epoch. Cardano's honest answer to a difficulty countdown: the same five

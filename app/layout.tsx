@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Cardano Blockchain Alive',
-  description: 'Every ranked Cardano stake pool in one disc: distance is stake, brightness is relay health.',
+  title: 'Cardano Art Explorer',
+  description: 'Cardano drawn from its own record: every ranked pool as a disc of light, every block as a bubble holding its transactions.',
   icons: { icon: '/favicon.svg' },
 };
 

@@ -1,8 +1,7 @@
 'use client';
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import BlockArt from './block-art';
-// The galaxy is kept but no longer shown: the opening screen is the chain now,
-// and choosing a pool is the screen after it. `galaxy-art.tsx` stays as it is.
+import GalaxyArt,{type GalaxyPool,type Focus} from './galaxy-art';
 import ChainExplorer from './chain-explorer';
 import {type Chain} from './chain-kit';
 import PoolArt,{crestName,crestRomaji,crestMeaning,type ArtData} from './pool-art';
@@ -111,7 +110,7 @@ const COPY={
   cw:'右',ccw:'左',meaning:'紋の意',
   emblem:'このプールだけの家紋 · ONE CREST, ONE POOL',
   netEyebrow:'Cardano / ステークプールの全体',
-  netKicker:'すべてのプールが、ひとつの円盤に',
+  netKicker:'ブロックチェーンが生きていることを、絵で確かめる',
   netIntro:['ランキングにあるすべてのステークプールが、それぞれの重さと明るさで同じ円盤を回っています。',
             '中心に集まっているのはステークであって、順位ではありません。'],
   netPools:'プール',netRtt:'RTT中央値',
@@ -119,6 +118,7 @@ const COPY={
   mote:()=>'拡大すると、一つひとつがそのプールのアートになる',
   hint:'ホイールで拡大 · 星をクリックでそのプールへ',
   open:'開く',
+  toChain:'チェーンを見る',
   scroll:'プールを選ぶ',
   selectHead:'ひとつ選ぶと、そのプールだけの姿になる。',
   selectNote:'選ぶまで、どのプールも代表にはなりません。',
@@ -138,7 +138,7 @@ const COPY={
   cw:'CW',ccw:'CCW',meaning:'THE SUBJECT',
   emblem:'このプールだけの家紋 · ONE CREST, ONE POOL',
   netEyebrow:'CARDANO / EVERY STAKE POOL OPERATOR',
-  netKicker:'EVERY POOL, ONE DISC',
+  netKicker:'PROOF, IN PICTURES, THAT THE CHAIN IS ALIVE',
   netIntro:['Every ranked stake pool turns in one disc, each with its own weight and its own light.',
             'What gathers at the centre is stake, not rank.'],
   netPools:'POOLS',netRtt:'MEDIAN RTT',
@@ -146,6 +146,7 @@ const COPY={
   mote:()=>'GO IN, AND EACH ONE BECOMES ITS OWN ARTWORK',
   hint:'WHEEL TO ZOOM IN · CLICK A STAR TO OPEN IT',
   open:'OPEN',
+  toChain:'SEE THE CHAIN',
   scroll:'CHOOSE A POOL',
   selectHead:'Choose one, and it becomes that pool alone.',
   selectNote:'Until you choose, no pool stands for the rest.',
@@ -180,6 +181,20 @@ function axisEvidence(p:Pool,lang:Lang){
 function artData(p:Pool):ArtData{const b=artPool(p);return{axes:b.axes,hueBase:b.hueBase,histVar:b.histVar,speedMul:b.speedMul,warnAxes:b.warnAxes,hist:p.hist,ticker:p.ticker,score:p.score,sig:poolSig(p.pool)}}
 function artPool(p:Pool,motif=0){const count=Math.max(12,Math.min(180,p.delegators));const parts=p.parts||fullParts,axes=[parts.reach,parts.redundancy,parts.independence,parts.ownership,parts.continuity,parts.latency].map((v,i)=>Math.max(0,Math.min(1,(v||0)/AXCAP[i])));const hist=p.hist.length?p.hist:[0];const mean=hist.reduce((a,b)=>a+b,0)/hist.length;const variance=hist.reduce((a,b)=>a+(b-mean)**2,0)/hist.length;const histVar=mean>0?Math.max(0,Math.min(1,Math.sqrt(variance)/mean*4)):0;const speedMul=p.rtt==null?.6:Math.max(.35,Math.min(1.6,1.6-Math.log10(p.rtt+1)*.42));const warnAxes=[2,3,4].filter(i=>axes[i]<1);const hueBase=poolHue(p.ticker,p.pool);return{block_hash:p.pool,block_no:p.rank,axes,histVar,speedMul,warnAxes,hueBase,motif,tx_hashes:Array.from({length:count},(_,i)=>`${p.pool}:${i}:${p.hist[i%Math.max(1,p.hist.length)]||0}`),txs:Array.from({length:count},(_,i)=>({tx_hash:`${p.pool}:${i}`,total_output:(p.stake/Math.max(1,count))*1e6,plutus_contracts:i<p.reachable?['relay']:[],assets_minted:i===p.blocks%count?['block']:[]}))}}
 async function loadPools():Promise<Pool[]>{return await fetchPools() as Pool[]}
+/** What the whole ranked set adds up to. Every figure is a plain sum over the
+    same records the per-pool panels read, so nothing on the opening screen
+    comes from a source the rest of the page cannot show you. */
+function networkTotals(pools:Pool[]){
+ const sum=(f:(p:Pool)=>number)=>pools.reduce((a,p)=>a+(f(p)||0),0);
+ const rtts=pools.map(p=>p.rtt).filter((x):x is number=>x!=null).sort((a,b)=>a-b);
+ return{count:pools.length,stake:sum(p=>p.stake),delegators:sum(p=>p.delegators),
+        blocks:sum(p=>p.blocks),rtt:rtts.length?rtts[rtts.length>>1]:null,
+        checked:pools[0]?.checked||'—'};
+}
+// How many motes the galaxy is drawn with. One goes to each pool as its star
+// and the rest are shared out by delegators, so this number decides how many
+// delegators a single mote stands for.
+const MOTES=200000;
 
 /** One pool, drawn.
     Its own component so the page can simply not render it. Until somebody
@@ -233,6 +248,15 @@ function PoolView({p,lang,motif,setMotif,frame,setFrame}:{
 
 export default function Home(){
  const[pools,setPools]=useState<Pool[]>(fallback),[selected,setSelected]=useState<Pool|null>(null),[query,setQuery]=useState(''),[status,setStatus]=useState<'loading'|'live'|'demo'>('loading'),[frame,setFrame]=useState(true),[motif,setMotif]=useState(0),[lang,setLang]=useState<Lang>('ja');
+ const copyRef=useRef<HTMLDivElement>(null);
+ /* What the disc has settled on. Past a certain magnification the motes can no
+    longer stand in for a pool's artwork, so the real drawing goes in their
+    place. */
+ const[focus,setFocus]=useState<Focus|null>(null);
+ const focusPool=useMemo(()=>focus?pools.find(p=>p.pool===focus.pool)||null:null,[focus,pools]);
+ const focusArt=useMemo(()=>focusPool?artPool(focusPool):null,[focusPool]);
+ const net=useMemo(()=>networkTotals(pools),[pools]);
+ const gal=useMemo<GalaxyPool[]>(()=>pools.map(p=>({pool:p.pool,ticker:p.ticker,hue:poolHue(p.ticker,p.pool),stake:p.stake,delegators:p.delegators,score:p.score,axes:axisRatios(p),sig:poolSig(p.pool)})),[pools]);
  /* The chain feed is a file beside the site, written into the build, because a
     browser is not allowed to read Koios directly. Refreshed on the same beat as
     the ranking. */
@@ -256,7 +280,39 @@ export default function Home(){
  const choose=useCallback((p:Pool)=>{setSelected(p);requestAnimationFrame(()=>requestAnimationFrame(()=>document.getElementById('pool-view')?.scrollIntoView({behavior:'smooth',block:'start'})))},[]);
  // The disc hands back a pool id, since that is all a star knows about itself.
  const pickPool=useCallback((id:string)=>{const p=poolsRef.current.find(x=>x.pool===id);if(p)choose(p)},[choose]);
- return <main><nav><div className="brand">SPO / <span>ALIVE</span></div><div className="nav-right"><div className="lang-switch">{(["ja","en"] as Lang[]).map(l=><button key={l} className={l===lang?"on":""} onClick={()=>setLang(l)}>{l==="ja"?"日本語":"EN"}</button>)}</div><div className={`status ${status}`}><i/>{status==='live'?'RELAY HEALTH · LIVE':status==='loading'?'CONNECTING':'CACHED SAMPLE'}</div></div></nav>
+ return <main><nav><div className="brand">CARDANO / <span>ART EXPLORER</span></div><div className="nav-right"><div className="lang-switch">{(["ja","en"] as Lang[]).map(l=><button key={l} className={l===lang?"on":""} onClick={()=>setLang(l)}>{l==="ja"?"日本語":"EN"}</button>)}</div><div className={`status ${status}`}><i/>{status==='live'?'RELAY HEALTH · LIVE':status==='loading'?'CONNECTING':'CACHED SAMPLE'}</div></div></nav>
+
+  <section className="galaxy-hero">
+   <GalaxyArt pools={gal} budget={MOTES} onPick={pickPool} onFocus={setFocus} avoid={copyRef}/>
+   <div className="galaxy-veil" aria-hidden="true"/>
+   {focus&&focusPool&&focusArt&&
+    <div className="galaxy-focus" style={{left:focus.x,top:focus.y,width:focus.size,height:focus.size,
+      opacity:focus.t,'--pool-hue':`${Math.round(poolHue(focusPool.ticker,focusPool.pool)*360)}deg`} as React.CSSProperties}>
+     <BlockArt block={focusArt} large/>
+     <button type="button" onClick={()=>choose(focusPool)}>
+      <b>{focusPool.ticker||'UNTITLED'}</b><span>{focusPool.score}/100</span><em>{t.open}</em>
+     </button>
+    </div>}
+   <div className="galaxy-copy" ref={copyRef}>
+    <div className="chain-state"><span>● CARDANO MAINNET</span><span>{net.count.toLocaleString()} RANKED POOLS</span><span>OBSERVED {net.checked}</span></div>
+    <p className="eyebrow">{t.netEyebrow}</p>
+    <h1><span>{t.netKicker}</span>CARDANO ART<br/>EXPLORER.</h1>
+    <p className="intro">{t.netIntro[0]}<br/>{t.netIntro[1]}</p>
+    <div className="net-figures">
+     <div><b>{net.count.toLocaleString()}</b><span>{t.netPools}</span></div>
+     <div><b>{compact(net.stake)} ₳</b><span>{t.stake}</span></div>
+     <div><b>{net.delegators.toLocaleString()}</b><span>{t.delegators}</span></div>
+     <div><b>{net.blocks.toLocaleString()}</b><span>{t.blocks}</span></div>
+     <div><b>{net.rtt==null?'—':`${net.rtt.toFixed(0)} ms`}</b><span>{t.netRtt}</span></div>
+    </div>
+    <ul className="net-legend">
+     {t.legend.map(([k,v])=><li key={k}><span>{k}</span><b>{v}</b></li>)}
+     <li className="mote"><b>{t.mote()}</b></li>
+    </ul>
+    <p className="galaxy-hint"><i/>{t.hint}</p>
+   </div>
+   <a className="scroll-cue" href="#chain"><span>{t.toChain}</span><i/></a>
+  </section>
 
   <ChainExplorer chain={chain} tickers={tickers} onPick={pickPool} lang={lang}/>
 

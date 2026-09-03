@@ -71,6 +71,14 @@ const LABEL:Record<World,{name:string;ja:string;en:string}>={
  dot:{name:'DOT',ja:'点',en:'PIXEL'},
 };
 
+/* Three of the four are finished and kept, but not shown. The top screen is
+   the disc again, and a shelf of four styles directly under it turns the page
+   into a menu of itself - the reader is asked to pick a look before they have
+   been given a reason to care. Flip this to show the shelf again; nothing else
+   has to change. */
+const SHOW_DOCK=false;
+const ONLY:World='glass';
+
 const KEY='onchain-world';
 const VIEWS={glass:WorldGlass,pop:WorldPop,sumi:WorldSumi,dot:WorldDot};
 
@@ -81,6 +89,7 @@ export default function ChainExplorer(props:{
     second way renders the wrong world first and then corrects it. The site is
     client-rendered, so there is no server pass to disagree with. */
  const [world,setWorld]=useState<World>(()=>{
+  if(!SHOW_DOCK)return ONLY;
   if(typeof window==='undefined')return 'glass';
   try{
    const v=localStorage.getItem(KEY);
@@ -96,8 +105,8 @@ export default function ChainExplorer(props:{
  const View=VIEWS[world];
  const heading=props.lang==='ja'?'見かたを選ぶ':'CHOOSE HOW TO LOOK';
 
- return <section className="chain-shell" data-world={world}>
-  <nav className="world-dock" aria-label={heading}>
+ return <section id="chain" className="chain-shell" data-world={world}>
+  {SHOW_DOCK&&<nav className="world-dock" aria-label={heading}>
    <span className="wdk-label">{heading}</span>
    <ul>
     {WORLDS.map(w=>{
@@ -112,7 +121,7 @@ export default function ChainExplorer(props:{
      </li>;
     })}
    </ul>
-  </nav>
+  </nav>}
   <View {...props}/>
  </section>;
 }

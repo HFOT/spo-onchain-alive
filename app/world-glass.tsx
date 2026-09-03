@@ -270,7 +270,10 @@ export default function WorldGlass({chain,tickers,onPick,lang}:WorldProps){
   <canvas ref={canvas} className="chain-canvas" aria-hidden="true"/>
 
   <header className="chain-head">
-   <h1><span>{t.kicker}</span>CARDANO BLOCKCHAIN<br/>ALIVE.</h1>
+   {/* A section heading, not the page's. The name of the site is on the screen
+       above this one, and two title-sized lines running into each other read as
+       two sites. */}
+   <h2><span>{t.kicker}</span>{t.blocks}</h2>
    <div className="chain-epoch">
     <div className="ce-top"><b>EPOCH {ep?.no??'—'}</b><span>{(pct*100).toFixed(2)}%</span></div>
     <i><em style={{width:`${(pct*100).toFixed(2)}%`}}/></i>
@@ -332,6 +335,7 @@ export default function WorldGlass({chain,tickers,onPick,lang}:WorldProps){
 
 const JA={
  kicker:'チェーンのいま',
+ blocks:'直近のブロック',
  recent:'直近のブロック',newest:'ブロックの中身',state:'チェーンの状態',
  height:'ブロック高',size:'サイズ',slot:'エポック内スロット',slots:'スロット',
  epBlocks:'このエポックのブロック',epTxs:'このエポックの tx',fill:'スロット充填率',
@@ -342,6 +346,7 @@ const JA={
 } as const;
 const EN={
  kicker:'THE CHAIN, AS IT STANDS',
+ blocks:'THE LATEST BLOCKS',
  recent:'RECENT BLOCKS',newest:'INSIDE THE BLOCK',state:'CHAIN STATE',
  height:'HEIGHT',size:'SIZE',slot:'EPOCH SLOT',slots:'SLOTS',
  epBlocks:'BLOCKS THIS EPOCH',epTxs:'TX THIS EPOCH',fill:'SLOTS FILLED',
