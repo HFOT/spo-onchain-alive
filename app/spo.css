@@ -739,13 +739,14 @@
 .ws-column div{display:grid;gap:5px;justify-items:end}
 .ws-column dt{color:rgba(239,228,210,.5);letter-spacing:.2em;
  font:11px "Hiragino Mincho ProN",serif}
-.ws-column dd{margin:0;color:#f4ead8;letter-spacing:.04em;font-variant-numeric:tabular-nums;
- font:400 clamp(15px,1.6vw,20px) "Hiragino Mincho ProN",serif}
+.ws-column dd{margin:0;color:#f4ead8;letter-spacing:.02em;
+ max-width:min(190px,15vw);text-align:right;line-height:1.5;
+ font:400 clamp(13px,1.4vw,18px) "Hiragino Mincho ProN",serif}
 .ws-progress{position:absolute;z-index:2;right:clamp(3vw,4.5vw,6vw);
  bottom:clamp(40px,8vh,90px);width:2px;height:clamp(90px,18vh,180px);
  background:rgba(239,228,210,.16)}
 .ws-progress i{display:block;width:100%;background:#efe4d2}
-.ws-seal{position:absolute;z-index:3;left:clamp(3vw,5vw,7vw);bottom:clamp(36px,7vh,80px);
+.ws-seal{position:absolute;z-index:3;left:clamp(3vw,5vw,7vw);bottom:clamp(104px,16vh,182px);
  display:grid;justify-items:start;gap:7px;cursor:pointer;border:0;background:none;padding:0}
 .ws-seal i{display:grid;place-items:center;width:44px;height:44px;font-style:normal;
  background:#9e2019;color:#f6ece0;border-radius:2px;
@@ -756,6 +757,12 @@
 .ws-seal em{color:#d8a89c;font-style:normal;letter-spacing:.16em;
  font:11px "Hiragino Mincho ProN",serif}
 .ws-seal:hover em{color:#f0c6bb}
+/* The reading of the poem, and the fact that the block picked it rather than
+   anybody writing it. Said plainly, under the seal. */
+.ws-yomi{position:absolute;z-index:3;left:clamp(3vw,5vw,7vw);bottom:clamp(32px,5.5vh,62px);
+ max-width:min(300px,22vw);margin:0;color:rgba(239,228,210,.62);
+ font:11px/1.9 "Hiragino Mincho ProN","Yu Mincho",serif;letter-spacing:.08em}
+.ws-yomi span{display:block;color:rgba(239,228,210,.34);font-size:9.5px;letter-spacing:.14em}
 .ws-seen{position:absolute;z-index:2;left:50%;bottom:8px;transform:translateX(-50%);margin:0;
  color:rgba(239,228,210,.32);letter-spacing:.14em;font:10px "Hiragino Mincho ProN",serif}
 

@@ -81,3 +81,32 @@ export function readChain(chain:Chain|null){
   seen:chain?new Date(chain.at):null,
  };
 }
+
+/** A number as it is written in Japanese.
+    Only the ink world uses this, but it belongs with the other readings rather
+    than inside a drawing: it is a way of saying the figure, not of drawing it,
+    and the figure is the same one every other world shows. */
+const DIGIT='〇一二三四五六七八九';
+const PLACE=['','十','百','千'];
+const MYRIAD=['','万','億','兆'];
+export function kanjiNum(n:number):string{
+ if(!isFinite(n)||n<0)return '';
+ n=Math.floor(n);
+ if(n===0)return DIGIT[0];
+ let out='',group=0;
+ while(n>0&&group<MYRIAD.length){
+  const chunk=n%10000;n=Math.floor(n/10000);
+  if(chunk){
+   let part='',c=chunk,place=0;
+   while(c>0){
+    const d=c%10;
+    // Ten, a hundred and a thousand are not written with their leading one.
+    if(d)part=(d===1&&place>0?'':DIGIT[d])+PLACE[place]+part;
+    c=Math.floor(c/10);place++;
+   }
+   out=part+MYRIAD[group]+out;
+  }
+  group++;
+ }
+ return out;
+}
