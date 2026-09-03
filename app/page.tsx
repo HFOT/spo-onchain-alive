@@ -3,7 +3,8 @@ import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import BlockArt from './block-art';
 // The galaxy is kept but no longer shown: the opening screen is the chain now,
 // and choosing a pool is the screen after it. `galaxy-art.tsx` stays as it is.
-import ChainExplorer,{type Chain} from './chain-explorer';
+import ChainExplorer from './chain-explorer';
+import {type Chain} from './chain-kit';
 import PoolArt,{crestName,crestRomaji,crestMeaning,type ArtData} from './pool-art';
 import {fetchPools} from './pools-source';
 import {poolHue} from './pool-hue';

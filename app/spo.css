@@ -627,3 +627,181 @@
  .chain-block{min-width:66px}
  .cf-meta{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* ==== the dock: four ways to look ========================================
+   Four explorers, picked the way apps are picked. The icons are drawn rather
+   than screenshotted, so each states its world at a glance - a rim of film,
+   cut shapes, a brush stroke, a grid of pixels - and stays crisp at any size.
+   The dock keeps its own shelf whatever is running underneath it, tinted just
+   enough to admit which world it opened. */
+.chain-shell{position:relative;width:100%;background:#020308}
+/* A nav, so it inherits the site header's rules; it is a shelf, not a header,
+   so it takes them back. */
+.world-dock{position:relative;z-index:5;display:flex;align-items:center;
+ height:auto;justify-content:flex-start;
+ gap:clamp(14px,2.4vw,30px);flex-wrap:wrap;
+ padding:clamp(14px,2.2vh,22px) 5vw;
+ border-bottom:1px solid rgba(255,255,255,.08);background:rgba(3,5,10,.9)}
+.wdk-label{color:#66798a;font:7px monospace;letter-spacing:.2em}
+.world-dock ul{list-style:none;display:flex;gap:clamp(10px,1.6vw,20px);margin:0;padding:0}
+.world-dock button{display:grid;justify-items:center;gap:6px;cursor:pointer;
+ border:0;background:none;padding:2px;opacity:.55;transition:opacity .2s,transform .2s}
+.world-dock button:hover{opacity:.9;transform:translateY(-2px)}
+.world-dock button.on{opacity:1}
+.wdk-icon{display:block;width:clamp(38px,4.4vw,52px);aspect-ratio:1;border-radius:24%;
+ overflow:hidden;background:#0a0f1c;
+ box-shadow:0 4px 14px -6px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.09);
+ transition:box-shadow .22s}
+.world-dock button.on .wdk-icon{box-shadow:0 6px 18px -6px rgba(0,0,0,.9),
+ inset 0 0 0 1px rgba(140,210,255,.55),0 0 0 2px rgba(127,208,255,.3)}
+.wdk-icon svg{width:100%;height:100%;display:block}
+.world-dock b{color:#cfdae6;font:600 8px monospace;letter-spacing:.16em}
+.world-dock em{color:#5f7183;font:7px monospace;font-style:normal;letter-spacing:.12em}
+.chain-shell[data-world="pop"] .world-dock{background:#1b0f2b;border-bottom-color:rgba(255,120,200,.3)}
+.chain-shell[data-world="sumi"] .world-dock{background:#241b12;border-bottom-color:rgba(220,200,170,.22)}
+.chain-shell[data-world="sumi"] .wdk-label,.chain-shell[data-world="sumi"] .world-dock em{color:#a3917a}
+.chain-shell[data-world="sumi"] .world-dock b{color:#efe4d2}
+.chain-shell[data-world="dot"] .world-dock{background:#04140c;border-bottom-color:rgba(57,217,138,.3)}
+.chain-shell[data-world="dot"] .wdk-label,.chain-shell[data-world="dot"] .world-dock em{color:#4e9c73}
+.chain-shell[data-world="dot"] .world-dock b{color:#b6ffd8}
+
+/* ==== POP: cut paper =====================================================
+   Loud on purpose. A candy ground, shapes stamped over it, and type heavy
+   enough to be part of the collage rather than a caption on it. */
+.w-pop{position:relative;width:100%;min-height:min(940px,calc(100vh - 160px));
+ overflow:hidden;
+ background:
+  repeating-linear-gradient(115deg,rgba(255,255,255,.07) 0 22px,transparent 22px 44px),
+  radial-gradient(circle at 78% 18%,#ff6fc0,transparent 46%),
+  radial-gradient(circle at 14% 82%,#6fd8ff,transparent 44%),
+  linear-gradient(160deg,#fff1d6,#ffd9ee 52%,#dcf0ff)}
+.wp-canvas{position:absolute;inset:0;width:100%;height:100%}
+.wp-head{position:absolute;z-index:2;left:5vw;top:clamp(20px,4vh,44px);
+ max-width:min(560px,62%);pointer-events:none}
+.wp-head h2{margin:0;color:#1a0f2a;line-height:.94;letter-spacing:-.04em;
+ font:800 clamp(30px,4.6vw,62px)/1 ui-rounded,"Hiragino Maru Gothic ProN",system-ui,sans-serif;
+ text-shadow:4px 5px 0 #fff,8px 10px 0 rgba(26,15,42,.16)}
+.wp-head p{margin:14px 0 0;color:#3b2450;font-size:13px;line-height:1.8;font-weight:600;
+ text-shadow:0 1px 0 rgba(255,255,255,.8)}
+.wp-epoch{position:absolute;z-index:2;right:5vw;top:clamp(20px,4vh,44px);
+ width:min(320px,42vw);pointer-events:none}
+.wp-epoch b{display:block;color:#1a0f2a;letter-spacing:.1em;
+ font:800 13px ui-rounded,system-ui,sans-serif}
+.wp-epoch i{display:block;height:14px;margin:8px 0 6px;border:2.5px solid #170d24;
+ border-radius:99px;background:#fff;overflow:hidden}
+.wp-epoch i em{display:block;height:100%;
+ background:repeating-linear-gradient(90deg,#ff4fa3 0 10px,#ffd23f 10px 20px)}
+.wp-epoch span{color:#3b2450;font:700 10px ui-rounded,system-ui,sans-serif}
+.wp-cards{position:absolute;z-index:2;left:5vw;bottom:clamp(18px,3.4vh,34px);
+ display:flex;gap:10px;flex-wrap:wrap;pointer-events:none}
+.wp-cards>div{padding:9px 13px;border:2.5px solid #170d24;border-radius:12px;
+ background:#fff;box-shadow:4px 5px 0 rgba(23,13,36,.85)}
+.wp-cards b{display:block;color:#1a0f2a;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+ font:800 clamp(14px,1.5vw,19px) ui-rounded,system-ui,sans-serif}
+.wp-cards span{display:block;margin-top:3px;color:#6b4d86;letter-spacing:.1em;
+ font:700 7.5px ui-rounded,system-ui,sans-serif}
+.wp-pick{position:absolute;z-index:3;right:5vw;bottom:clamp(18px,3.4vh,34px);
+ display:grid;justify-items:end;gap:3px;cursor:pointer;
+ padding:12px 18px;border:3px solid #170d24;border-radius:16px;background:#ffd23f;
+ box-shadow:6px 7px 0 rgba(23,13,36,.9);transition:transform .15s,box-shadow .15s}
+.wp-pick:hover{transform:translate(-2px,-2px);box-shadow:8px 9px 0 rgba(23,13,36,.9)}
+.wp-pick em{color:#8a3d00;font-style:normal;font:800 11px ui-rounded,system-ui,sans-serif}
+.wp-pick b{color:#170d24;letter-spacing:-.02em;
+ font:800 clamp(15px,1.7vw,21px) ui-rounded,system-ui,sans-serif}
+.wp-pick span{color:#5a3a12;letter-spacing:.12em;font:700 8px ui-rounded,system-ui,sans-serif}
+.wp-seen{position:absolute;z-index:2;left:50%;bottom:6px;transform:translateX(-50%);margin:0;
+ color:rgba(26,15,42,.5);letter-spacing:.12em;font:700 7px ui-rounded,system-ui,sans-serif}
+
+/* ==== SUMI: ink on paper =================================================
+   Wood behind, paper on it, and almost nothing else. The world is carbon and
+   one seal in cinnabar; the empty space is the composition. */
+.w-sumi{position:relative;width:100%;min-height:min(940px,calc(100vh - 160px));
+ overflow:hidden;
+ background:
+  repeating-linear-gradient(91deg,rgba(60,36,18,.22) 0 2px,transparent 2px 9px),
+  repeating-linear-gradient(88deg,rgba(30,18,8,.16) 0 1px,transparent 1px 23px),
+  linear-gradient(101deg,#5a3c22,#7a5433 42%,#4e341e)}
+.ws-sheet{position:absolute;inset:clamp(18px,3.6vh,44px) clamp(12vw,18vw,22vw)}
+.ws-paper{position:absolute;inset:0;
+ background:
+  repeating-linear-gradient(102deg,rgba(120,96,64,.05) 0 3px,transparent 3px 7px),
+  linear-gradient(172deg,#f3ead6,#e9dcc2 55%,#efe6d2);
+ box-shadow:0 30px 60px -30px rgba(0,0,0,.75),0 0 0 1px rgba(90,64,36,.28)}
+.ws-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ws-title{position:absolute;z-index:2;left:clamp(2vw,3.4vw,5vw);top:clamp(40px,8vh,90px);
+ width:min(150px,10vw);pointer-events:none;writing-mode:vertical-rl;text-orientation:mixed}
+.ws-title h2{margin:0;color:#efe4d2;letter-spacing:.22em;
+ font:600 clamp(17px,1.9vw,25px)/1.5 "Hiragino Mincho ProN","Yu Mincho",serif}
+.ws-title p{margin:16px 0 0;color:rgba(239,228,210,.6);letter-spacing:.14em;
+ font:12px/2 "Hiragino Mincho ProN","Yu Mincho",serif}
+.ws-column{position:absolute;z-index:2;right:clamp(3vw,4.5vw,6vw);top:clamp(40px,8vh,90px);
+ display:flex;flex-direction:column;gap:clamp(14px,2.6vh,26px);margin:0;pointer-events:none}
+.ws-column div{display:grid;gap:5px;justify-items:end}
+.ws-column dt{color:rgba(239,228,210,.5);letter-spacing:.2em;
+ font:11px "Hiragino Mincho ProN",serif}
+.ws-column dd{margin:0;color:#f4ead8;letter-spacing:.04em;font-variant-numeric:tabular-nums;
+ font:400 clamp(15px,1.6vw,20px) "Hiragino Mincho ProN",serif}
+.ws-progress{position:absolute;z-index:2;right:clamp(3vw,4.5vw,6vw);
+ bottom:clamp(40px,8vh,90px);width:2px;height:clamp(90px,18vh,180px);
+ background:rgba(239,228,210,.16)}
+.ws-progress i{display:block;width:100%;background:#efe4d2}
+.ws-seal{position:absolute;z-index:3;left:clamp(3vw,5vw,7vw);bottom:clamp(36px,7vh,80px);
+ display:grid;justify-items:start;gap:7px;cursor:pointer;border:0;background:none;padding:0}
+.ws-seal i{display:grid;place-items:center;width:44px;height:44px;font-style:normal;
+ background:#9e2019;color:#f6ece0;border-radius:2px;
+ font:600 21px "Hiragino Mincho ProN",serif;box-shadow:0 4px 14px -6px rgba(0,0,0,.7)}
+.ws-seal b{color:#f4ead8;letter-spacing:.1em;font:600 15px "Hiragino Mincho ProN",serif}
+.ws-seal span{color:rgba(239,228,210,.55);letter-spacing:.08em;
+ font:11px "Hiragino Mincho ProN",serif}
+.ws-seal em{color:#d8a89c;font-style:normal;letter-spacing:.16em;
+ font:11px "Hiragino Mincho ProN",serif}
+.ws-seal:hover em{color:#f0c6bb}
+.ws-seen{position:absolute;z-index:2;left:50%;bottom:8px;transform:translateX(-50%);margin:0;
+ color:rgba(239,228,210,.32);letter-spacing:.14em;font:10px "Hiragino Mincho ProN",serif}
+
+/* ==== DOT: a screen ======================================================
+   A console, framed like one. Scanlines over everything, one green, and type
+   that never leaves the grid. */
+.w-dot{position:relative;width:100%;min-height:min(940px,calc(100vh - 160px));overflow:hidden;
+ background:radial-gradient(ellipse 80% 70% at 50% 46%,#062015,#02100a 72%,#010805)}
+.wd-canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+.wd-scan{position:absolute;inset:0;z-index:2;pointer-events:none;
+ background:repeating-linear-gradient(0deg,rgba(0,0,0,.2) 0 1px,transparent 1px 4px);
+ box-shadow:inset 0 0 clamp(60px,10vw,150px) rgba(0,0,0,.85)}
+.wd-hud{position:absolute;z-index:3;left:0;right:0;display:flex;justify-content:space-between;
+ gap:14px;flex-wrap:wrap;padding:clamp(12px,2.2vh,20px) 5vw;pointer-events:none;
+ color:#39d98a;font:9px ui-monospace,monospace;letter-spacing:.18em}
+.wd-top{top:0;border-bottom:1px solid rgba(57,217,138,.22)}
+.wd-bottom{bottom:0;border-top:1px solid rgba(57,217,138,.22);color:#8affc1}
+.wd-legend{position:absolute;z-index:3;left:5vw;top:clamp(46px,8vh,74px);margin:0;
+ max-width:min(420px,45vw);pointer-events:none;color:rgba(138,255,193,.6);
+ font:10px/1.85 ui-monospace,monospace;letter-spacing:.06em}
+.wd-pick{position:absolute;z-index:4;right:5vw;bottom:clamp(48px,9vh,84px);
+ display:grid;justify-items:end;gap:4px;cursor:pointer;
+ padding:11px 15px;border:1px solid rgba(57,217,138,.55);background:rgba(2,20,12,.9);
+ transition:border-color .2s,background .2s}
+.wd-pick:hover{border-color:#8affc1;background:rgba(6,42,26,.95)}
+.wd-pick b{color:#eafff2;letter-spacing:.1em;font:600 13px ui-monospace,monospace}
+.wd-pick span{color:#39d98a;letter-spacing:.12em;font:9px ui-monospace,monospace}
+.wd-pick em{color:#b6ffd8;font-style:normal;letter-spacing:.16em;
+ font:9px ui-monospace,monospace}
+.wd-seen{position:absolute;z-index:3;left:50%;bottom:clamp(48px,9vh,84px);
+ transform:translateX(-50%);margin:0;color:rgba(57,217,138,.45);
+ letter-spacing:.14em;font:8px ui-monospace,monospace}
+
+@media(max-width:900px){
+ .w-pop,.w-sumi,.w-dot{min-height:auto;padding-bottom:64px}
+ .wp-head{position:relative;left:0;top:0;max-width:100%;padding:clamp(18px,4vh,30px) 5vw 0}
+ .wp-epoch,.wp-cards,.wp-pick{position:relative;right:auto;left:auto;top:auto;bottom:auto;
+  width:auto;margin:14px 5vw 0}
+ .ws-sheet{inset:clamp(14px,3vh,24px) 6vw}
+ .ws-title,.ws-column,.ws-progress,.ws-seal{position:relative;left:auto;right:auto;
+  top:auto;bottom:auto;writing-mode:horizontal-tb}
+ .ws-title{width:auto;padding:clamp(18px,4vh,30px) 6vw 0}
+ .ws-column{flex-direction:row;flex-wrap:wrap;padding:16px 6vw 0}
+ .ws-column div{justify-items:start}
+ .ws-progress{width:60%;height:2px;margin:14px 6vw}
+ .ws-seal{padding:0 6vw 20px}
+ .wd-legend{position:relative;left:auto;top:auto;max-width:100%;padding:56px 5vw 0}
+ .wd-pick{position:relative;right:auto;bottom:auto;margin:18px 5vw 0;justify-items:start}
+}
